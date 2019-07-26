@@ -1,0 +1,21 @@
+class Solution {
+    
+    public int numSquares(int n) {
+        int[] answer = new int[n+1];
+        if(n<=3)
+            return n;
+        answer[0] = 0;
+        answer[1] = 1;
+        answer[2] = 2;
+        answer[3] = 3;
+        for(int i = 4;i<=n;i++){
+           int res = Integer.MAX_VALUE;
+           for(int x = 1;x*x<=i;x++){
+                res = Math.min(res,1+answer[i-(x*x)]);
+            }
+            answer[i] = res;
+        }
+        
+        return answer[n];
+    }
+}
