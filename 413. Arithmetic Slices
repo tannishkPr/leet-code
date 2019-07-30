@@ -1,0 +1,15 @@
+class Solution {
+    public int numberOfArithmeticSlices(int[] A) {
+        int currentSum = 0;
+        int finalSum = 0;
+        for(int i = 2;i<A.length;i++){
+            if(A[i]-A[i-1] == A[i-1]-A[i-2]){
+                currentSum += 1;
+                finalSum+=currentSum;
+            } else {
+                currentSum = 0;
+            }
+        }
+        return finalSum;
+    }
+}
