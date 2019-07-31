@@ -1,0 +1,42 @@
+class Solution {
+    public int search(int[] nums, int key) {
+        if(nums.length == 0)
+            return -1;
+        int pivot = findPivot(nums,0,nums.length-1);
+        if(pivot == -1)
+            return binarySearch(nums,0,nums.length-1,key);
+        if(pivot!=-1 &&nums[pivot] == key)
+            return pivot;
+       if (nums[0] <= key) 
+           return binarySearch(nums, 0, pivot-1, key); 
+       return binarySearch(nums, pivot+1, nums.length-1, key); 
+
+    }
+    
+    public int findPivot(int[] a,int left,int right){
+        if(left>right)
+            return -1;
+        if(left == right)
+            return left;
+        int mid = (left+right)/ 2;
+        if (mid < right && a[mid] > a[mid + 1]) 
+           return mid; 
+       if (mid > left && a[mid] < a[mid - 1]) 
+           return (mid-1); 
+
+        if(a[left] >= a[mid])
+            return findPivot(a,left,mid-1);
+        return findPivot(a,mid+1,right);
+    }
+    
+    public int binarySearch(int[] a,int left,int right,int key){
+        if(left > right)
+            return -1;
+        int mid = (left+right)/2;
+        if(a[mid] == key)
+            return mid;
+        if(key < a[mid])
+            return binarySearch(a,left,mid-1,key);
+        return binarySearch(a,mid+1,right,key);
+    }
+}
