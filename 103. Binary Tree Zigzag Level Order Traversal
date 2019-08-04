@@ -1,0 +1,57 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+
+
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> answer = new ArrayList<>();
+        int height = findHeight(root);
+        boolean as = true;
+        for(int i=1;i<=height;i++){
+            answer.add(as?
+                       levelWise(root,1,new ArrayList<>(),i):
+                       levelWiseOpp(root,1,new ArrayList<>(),i));
+            
+        }
+        return answer;
+    }
+    
+    public List<Integer> levelWise(TreeNode root,int level,ArrayList<Integer> li,int required){
+        if(root == null)
+            return li;
+        if(level == required)
+            li.add(root.val);
+        else {
+            levelWise(root.left,level+1,li,required);
+            levelWise(root.right,level+1,li,required);
+        }
+        return li;
+    }
+    
+    public List<Integer> levelWiseOpp(TreeNode root,int level,ArrayList<Integer> li,int required){
+        if(root == null)
+            return li;
+        if(level == required)
+            li.add(root.val);
+        else {
+            levelWise(root.right,level+1,li,required);
+            levelWise(root.left,level+1,li,required);
+        }
+        return li;
+    }
+    
+    public int findHeight(TreeNode root){
+        if(root == null)
+            return 0;
+        int left = findHeight(root.left);
+        int right = findHeight(root.right);
+        return 1+Math.max(left,right);
+    }
+}
