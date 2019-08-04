@@ -1,0 +1,43 @@
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+        TreeMap<String,Integer> map = new TreeMap<>();
+        for(String word:words) { 
+            if(map.containsKey(word)){
+                map.put(word,map.get(word)+1);
+            } else {
+               map.put(word,1); 
+            }
+        }
+        int count = 0;
+        ArrayList<String> array = new ArrayList<>();
+        Iterator hmIterator = map.entrySet().iterator(); 
+          ArrayList<Name> names = new ArrayList<>();
+
+        // Iterate through the hashmap 
+        // and add some bonus marks for every student 
+  
+        while (hmIterator.hasNext()) { 
+            Map.Entry mapElement = (Map.Entry)hmIterator.next(); 
+            Name nam = new Name();
+            nam.name = (String)mapElement.getKey();
+            nam.occurace = (int) mapElement.getValue();
+            names.add(nam);
+        } 
+        Collections.sort(names);
+        for(int i=0;i<k;i++){
+            array.add(names.get(i).name);
+        }
+        return array;
+    }
+}
+
+
+class Name implements Comparable<Name>{
+    public String name;
+    public int occurace; 
+    
+     public int compareTo(Name n) 
+    { 
+        return n.occurace - this.occurace; 
+    } 
+}
