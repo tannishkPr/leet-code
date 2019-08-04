@@ -1,0 +1,16 @@
+class Solution {
+    public int numUniqueEmails(String[] emails) {
+        Set<String> uniqemails = new HashSet<String>();
+    for (String email : emails) {
+        String[] names = email.split("@");
+        String localname = names[0];
+        String domainname = names[1];
+        localname = localname.split("\\+")[0];
+        localname = localname.replaceAll("\\.", "");
+        uniqemails.add(localname + "@" + domainname);
+    }
+
+    System.out.println(uniqemails);
+    return uniqemails.size();
+    }
+}
