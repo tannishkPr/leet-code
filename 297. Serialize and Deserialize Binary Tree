@@ -1,0 +1,68 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Codec {
+
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder nodes = new StringBuilder("");
+        Queue<TreeNode> queue = new LinkedList<>();
+        if(root == null) return "null";
+        queue.add(root);
+        while(!queue.isEmpty()){
+            TreeNode node = queue.poll();
+            if(node == null){
+                nodes.append("null");
+                nodes.append(",");
+                continue;
+            }
+            nodes.append(String.valueOf(node.val));
+            nodes.append(",");
+            queue.add(node.left);
+            queue.add(node.right);
+        }
+        return nodes.toString();
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        Queue<TreeNode> myq = new LinkedList<>();
+        String[] nodes = data.split(",");
+        int i = 0;
+        if(nodes[0] == "null") return null;
+        TreeNode root = new TreeNode(Integer.parseInt(nodes[0]));
+        myq.add(root);
+        
+        while(!myq.isEmpty()){
+            TreeNode currLeft = null;
+            TreeNode currRight = null;
+            TreeNode currRoot = myq.poll();
+            
+            if(currRoot != null){
+                if(i*2 + 1 < (nodes.length - 1) && !nodes[i*2 + 1].equals("null")){
+                    currLeft = new TreeNode(Integer.parseInt(nodes[i*2+1]));
+            }
+                if(i*2 + 2 < (nodes.length - 1) && !nodes[i*2 + 2].equals("null")){
+                    currRight = new TreeNode(Integer.parseInt(nodes[i*2+2]));
+                }
+                myq.add(currLeft);
+                myq.add(currRight);
+                currRoot.left = currLeft;
+                currRoot.right = currRight;
+                i++;
+        }
+        
+    }
+        return root;
+    }
+}
+
+// Your Codec object will be instantiated and called as such:
+// Codec codec = new Codec();
+// codec.deserialize(codec.serialize(root));
