@@ -1,0 +1,32 @@
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+      List<Integer> res = new ArrayList<Integer>();
+        int m=matrix.length;
+        if(m==0)return res;
+        if(m==1){
+            res = Arrays.stream(matrix[0]).boxed().collect(Collectors.toList());
+            return res;
+        }
+        int n=matrix[0].length;
+        int ms=0, me=m-1;
+        int ns=0, ne=n-1;
+        
+        while(ms<=me && ns<=ne) {
+            if(ns<ne){
+                for(int i=ns; i<=ne && ns<=ne; i++)res.add(matrix[ms][i]);
+                ms++;
+            } if(ms<me){
+                for(int i=ms; i<=me && ms<=me; i++)res.add(matrix[i][ne]);
+                ne--;
+            } if(ns<ne  && me>=ms){
+                for(int i=ne; i>=ns && ns<=ne; i--)res.add(matrix[me][i]);
+                me--;
+            } if(ms<me  && ns<=ne){
+                for(int i=me; i>=ms && ms<=me; i--)res.add(matrix[i][ns]);
+                ns++;
+            }
+        }
+        
+        return res;
+    }
+}
