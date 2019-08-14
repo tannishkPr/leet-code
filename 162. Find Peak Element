@@ -1,0 +1,28 @@
+class Solution {
+    // O(n) : Linear Search nums[i] along with its neighbours 
+    // [1,2,3,1] : mid : 2 if(a[mid] > a[mid+1] && a[mid] >a[mid-1]) return mid; 
+    // [1,2,3,1] : if(a[mid-1] < a[mid]) search in right half 
+    //              else continue in left half 
+    // [1,2,1,3,5,6,4] : mid : 3 search in right half : 
+    //                   mid: 5 search in right half 
+    //                   mid : 6 
+    public int findPeakElement(int[] a) {
+        int low = 0 ;
+        int high = a.length - 1;
+        int mid;
+        while(low < high) { 
+            mid = (low+high)/2;
+            if(((mid == 0) && a[mid]>a[mid+1])
+               ||((mid == a.length - 1) && (a[mid] > a[mid-1]))
+               ||(a[mid] > a[mid+1] && a[mid] > a[mid-1])
+              ){
+                return mid;
+            }
+            else if(mid == 0 || a[mid-1]<a[mid])
+                low = mid+1;
+            else 
+                high = mid-1;
+        }
+        return low;
+    }
+}
