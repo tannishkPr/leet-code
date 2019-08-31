@@ -1,0 +1,21 @@
+class Solution {
+    List<List<Integer>> array = new ArrayList<List<Integer>>();
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        return combinationSumUtil(candidates,target,0,new ArrayList<Integer>(),0);
+    }
+    public List<List<Integer>> combinationSumUtil(int[] candidates,int target,int index,List<Integer> arr,int start){
+        if(target < 0)
+            return array;
+        if(target == 0){
+            array.add(new ArrayList<>(arr));
+            return array;
+        }
+        for(int i=start;i<candidates.length;i++){
+            arr.add(candidates[i]);
+            combinationSumUtil(candidates,target-candidates[i],i,arr,i);
+            arr.remove(arr.size()-1);
+        }
+        return array;
+    }
+}
