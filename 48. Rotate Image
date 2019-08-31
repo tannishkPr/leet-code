@@ -1,0 +1,16 @@
+class Solution {
+    public void rotate(int[][] matrix) {
+    int row = 0;
+      int n = matrix.length - 1;
+        while(row <= n / 2){
+            for(int i = row; i < n - row; i++){
+                int tmp = matrix[row][i];
+                matrix[row][i] = matrix[n - i][row];
+                matrix[n - i][row] = matrix[n - row][ n - i];
+                matrix[n - row][ n - i] = matrix[i][n - row];
+                matrix[i][n - row] = tmp;
+            }
+            row++;
+        }
+    }
+}    
