@@ -1,0 +1,16 @@
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        generateSubsets(nums,0,result,new ArrayList<>());
+        return result;
+    }
+    
+    public void generateSubsets(int[] nums,int index, List<List<Integer>> result,List<Integer> numbers){
+        result.add(new ArrayList<>(numbers));
+        for(int i=index;i<nums.length;i++){
+            numbers.add(nums[i]);
+            generateSubsets(nums,i+1,result,numbers);
+            numbers.remove(numbers.size()-1);
+        }
+    }
+}
