@@ -1,0 +1,17 @@
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        char[] si = new char[26];
+        char[] ti = new char[26];
+        for(int i=0;i<s.length();i++){
+            si[s.charAt(i)-'a']++;
+        }
+        for(int i=0;i<t.length();i++){
+            ti[t.charAt(i)-'a']++;
+        }
+         for(int i=0;i<26;i++){
+            if(si[i]!=ti[i])
+                return false;
+        }
+        return true;
+    }
+}
