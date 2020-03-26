@@ -1,0 +1,39 @@
+class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> res = new ArrayList<>();
+        if(s == null || s.length() == 0) {
+            return res;
+        }
+        List<String> path = new ArrayList<>();
+        helper(res, path, s, 0);
+        return res;
+    }
+    
+    private void helper(List<List<String>> res, List<String> path, String s, int pos) {
+        if(pos == s.length()) {
+            res.add(new ArrayList<String> (path));
+            return;
+        }
+        for(int i = pos; i < s.length(); i++) {
+            String sub = s.substring(pos, i + 1);
+            if(isPalindrome(sub)) {
+                path.add(sub);
+                helper(res, path, s, i + 1);
+                path.remove(path.size() - 1);
+            }
+        }
+    }
+    
+    private boolean isPalindrome(String s) {
+        int start = 0;
+        int end = s.length() - 1;
+        while(start < end) {
+            if(s.charAt(start) != s.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+}
