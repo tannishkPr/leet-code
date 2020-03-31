@@ -1,0 +1,29 @@
+class Solution {
+    
+    public boolean canPartition(int[] nums) {
+        int sum = 0;
+        for(int i:nums){
+            sum+=i;
+        }
+        if(sum%2!=0)
+            return false;
+        return helper(nums,0,sum/2,new HashMap<String,Boolean>());
+    }
+    boolean helper(int[] nums,int currentPos,int sum,HashMap<String,Boolean> map){
+        String key = currentPos+","+sum;
+        if(sum == 0)
+            return true;
+        if(currentPos == nums.length)
+            return false;
+        if(sum<0)
+            return false;
+        if(map.containsKey(key))
+            return map.get(key);
+        if(nums[currentPos] > sum)
+            return false;
+        boolean result =  helper(nums,currentPos+1,sum,map) || helper(nums,currentPos+1,sum-nums[currentPos],map); 
+        map.put(key,result);
+        return result;
+    }
+    
+}
