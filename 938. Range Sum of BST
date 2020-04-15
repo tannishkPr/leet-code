@@ -1,0 +1,27 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    int ans;
+    public int rangeSumBST(TreeNode root, int L, int R) {
+        ans = 0;
+        dfs(root,L,R);
+        return ans;
+    }
+    public void dfs(TreeNode root,int l,int r){
+        if(root == null)
+            return;
+        if(root.val>=l && root.val<=r)
+            ans+=root.val;
+        if(root.val>l)
+            dfs(root.left,l,r);
+        if(root.val<r)
+            dfs(root.right,l,r);
+    }
+}
