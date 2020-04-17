@@ -1,0 +1,24 @@
+class Solution {
+    public String largestNumber(int[] nums) {
+        String[] result = new String[nums.length];
+        for(int i=0;i<nums.length;i++){
+            result[i] = String.valueOf(nums[i]);
+        }
+        Arrays.sort(result,new SortByNumber());
+        String answer = "";
+        if(result[0].equals("0"))
+            return "0";
+        for(int i=0;i<result.length;i++){
+            answer += result[i];
+        }
+        return answer;
+    }
+}
+
+class SortByNumber implements Comparator<String>{
+    public int compare(String a,String b){
+        String res = a+b;
+        String res2 = b+a;
+        return res2.compareTo(res);
+    }
+} 
