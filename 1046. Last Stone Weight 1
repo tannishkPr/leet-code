@@ -1,0 +1,16 @@
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>((a,b) -> b.compareTo(a));
+        for(int i:stones){
+            queue.offer(i);
+        }
+        while(!queue.isEmpty()){
+            if(queue.size() == 1)
+                return queue.poll();
+            int a = queue.poll();
+            int b = queue.poll();
+            if(a>=b) queue.offer(a-b);
+        }
+        return -1;
+    }
+}
