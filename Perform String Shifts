@@ -1,0 +1,51 @@
+class Solution {
+    public String stringShift(String s, int[][] shift) {
+        char[] ss = s.toCharArray();
+        int left = 0;
+        int right = 0;
+        for (int i = 0; i < shift.length; i++) {
+            int[] cur = shift[i];
+            if (cur[0] == 0) {
+                left+=cur[1];
+            } else {
+                right+=cur[1];
+            }
+        }
+        
+        if (left - right > 0) {
+            ss = shiftLeft(ss, left - right);
+        } else if (right - left > 0) {
+            ss = shiftRight(ss, right - left);
+        }
+        
+        return String.valueOf(ss);
+
+        
+    }
+    
+    private char[] shiftLeft(char[] s, int amount) {
+        for (int j = 0; j < amount; j++) { 
+            char tmp = s[0];
+
+            for (int i = 1; i < s.length; i++) {
+                s[i-1] = s[i];
+            }
+
+            s[s.length - 1] = tmp;
+        }
+        return s;
+    }
+    
+    private char[] shiftRight(char[] s,int amount) {
+         for (int j = 0; j < amount; j++) { 
+            char tmp = s[s.length - 1];
+
+            for (int i = s.length - 2; i >= 0; i--) {
+                s[i+1] = s[i];
+            }
+
+            s[0] = tmp;       
+         }
+        return s;
+    }
+}
