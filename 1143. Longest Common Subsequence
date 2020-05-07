@@ -1,0 +1,26 @@
+class Solution {
+    HashMap<String,Integer> map = new HashMap<>();
+    public int longestCommonSubsequence(String text1, String text2) {
+        int m = text1.length()-1;
+        int n = text2.length()-1;
+        char[] text1Arr = text1.toCharArray();
+        char[] text2Arr = text2.toCharArray();
+        return lcs(text1Arr,text2Arr,m,n);
+    }
+    
+    public int lcs(char[] text1,char[] text2,int m,int n){
+        if(m==-1||n==-1)
+            return 0;
+        String ans = m+","+n;
+        int result = 0;
+        if(map.containsKey(ans))
+            return map.get(ans);
+        if(text1[m] == text2[n]){
+            result = 1+lcs(text1,text2,m-1,n-1);
+        } else {
+            result = Math.max(lcs(text1,text2,m-1,n),lcs(text1,text2,m,n-1));
+        }
+        map.put(ans,result);
+        return result;
+    }
+}
