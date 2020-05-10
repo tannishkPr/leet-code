@@ -1,0 +1,15 @@
+class Solution {
+    public int rangeBitwiseAnd(int m, int n) {
+        int i = 1;
+        while (i <= n && m != 0){
+            if ((m & i) == i){
+                if (Integer.MAX_VALUE - m >= i && m + i <= n){
+                    m -= i;
+                }
+                else return m;
+            }
+            i = i << 1;
+        }
+        return m;
+    }
+}
