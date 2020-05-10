@@ -1,0 +1,17 @@
+class Solution {
+    public int findJudge(int N, int[][] trust) {
+        if(trust.length == 0)
+            return N;
+        int[] internal = new int[N+1];
+        int[] outgoing = new int[N+1];
+        for(int i=0;i<trust.length;i++){
+            internal[trust[i][0]]++;
+            outgoing[trust[i][1]]++;
+        }
+         for(int i=0;i<=N;i++){
+            if(internal[i] == 0 && outgoing[i] == N-1)
+                return i;
+        }
+        return -1;
+    }
+}
