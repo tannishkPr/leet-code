@@ -1,0 +1,17 @@
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        boolean[][] seen = new boolean[image.length][image[0].length];
+        floodIt(image,sr,sc,image[sr][sc],newColor,seen);
+        return image;
+    }
+    public void floodIt(int[][] image,int x,int y,int currentColor,int newColor,boolean[][] seen){
+        if(x==-1 || x==image.length || y == -1 || y ==image[0].length || image[x][y] != currentColor || seen[x][y] == true)
+            return;
+        image[x][y] = newColor;
+        seen[x][y] = true;
+        floodIt(image,x-1,y,currentColor,newColor,seen);
+        floodIt(image,x+1,y,currentColor,newColor,seen);
+        floodIt(image,x,y-1,currentColor,newColor,seen);
+        floodIt(image,x,y+1,currentColor,newColor,seen);
+    }
+}
