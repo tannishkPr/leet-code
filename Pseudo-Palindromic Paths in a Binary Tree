@@ -1,0 +1,60 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+        static int NO_OF_CHARS = 256; 
+
+    int count = 0;
+    public int pseudoPalindromicPaths (TreeNode root) {
+        path(root,"");
+        return count;
+    }
+    public void path(TreeNode root,String pathString){
+        if(root == null)
+            return;
+        if(root.left == null && root.right == null){
+            pathString = pathString+String.valueOf(root.val);
+            if(canFormPalindrome(pathString)){
+                System.out.println(pathString);
+                count++;
+            }
+            return;
+        }
+        pathString = pathString+String.valueOf(root.val);
+        path(root.left,pathString);
+        path(root.right,pathString);
+    } 
+    
+    public boolean canFormPalindrome(String str) { 
+      
+        int count[] = new int[NO_OF_CHARS]; 
+        Arrays.fill(count, 0); 
+
+        for (int i = 0; i < str.length(); i++) 
+        count[(int)(str.charAt(i))]++; 
+
+        int odd = 0; 
+        for (int i = 0; i < NO_OF_CHARS; i++)  
+        { 
+        if ((count[i] & 1) == 1) 
+            odd++; 
+
+        if (odd > 1) 
+            return false; 
+        } 
+
+        return true; 
+    } 
+}
