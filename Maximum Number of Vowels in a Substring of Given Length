@@ -5,13 +5,17 @@ class Solution {
             map[s.charAt(i)-'a']++;
         }
         int max= 0;
+         int j = 0;
         for(int i=k;i<s.length();i++){
             map[s.charAt(i)-'a']++;
-             map[s.charAt(i-k)-'a']--;
-
+             map[s.charAt(j)-'a']--;
+             j++;
             max = Math.max(max,count(map));
         }
+        if(max<= k)
         return max;
+        else
+          Return k;
     }
      public int count(int[] map) {
          int count = 0;
