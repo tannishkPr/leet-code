@@ -1,0 +1,6 @@
+class Solution {
+    public int[][] kClosest(int[][] points, int K) {
+        Arrays.sort(points,(int[] x,int[] y)->((x[0]*x[0]+x[1]*x[1])-(y[0]*y[0]+y[1]*y[1])));
+        return Arrays.copyOfRange(points, 0, K);
+    }
+}
