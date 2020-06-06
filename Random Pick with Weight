@@ -1,0 +1,32 @@
+class Solution {
+    ArrayList<Integer> list = new ArrayList<>(); 
+    Random random;
+    int total;
+    public Solution(int[] w) {
+        random = new Random();
+        total = 0;
+        
+        for(int i=0;i<w.length;i++){
+            total += w[i];
+            list.add(total);
+        }
+        
+    }
+    
+    public int pickIndex() {
+        int number = random.nextInt(total);
+        
+        for(int i=0;i<list.size();i++){
+            if(number<list.get(i))
+                return i;
+        }
+        
+        return -1;
+    }
+}
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution obj = new Solution(w);
+ * int param_1 = obj.pickIndex();
+ */
