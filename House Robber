@@ -1,0 +1,16 @@
+class Solution {
+    HashMap<Integer,Integer> map;
+    public int rob(int[] nums) {
+        map = new HashMap<>();
+        return robUtil(nums,nums.length-1);
+    }
+    public int robUtil(int[] nums,int currentPosition){
+        if(map.containsKey(currentPosition))
+            return map.get(currentPosition);
+        if(currentPosition < 0)
+            return 0;
+        int answer = Math.max(robUtil(nums,currentPosition-2) + nums[currentPosition],robUtil(nums,currentPosition-1));
+        map.put(currentPosition,answer);
+        return answer;
+    }
+}
