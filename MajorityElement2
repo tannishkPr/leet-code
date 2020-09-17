@@ -1,0 +1,39 @@
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        int countOne = 0;
+        int countTwo = 0;
+        Integer one = null;
+        Integer two = null;
+        for(int i:nums){
+            if(one!=null && one ==i)
+                countOne++;
+            else  if(two!=null && two ==i)
+                countTwo++;
+            else if(countOne == 0){
+                one = i;
+                countOne++;
+            } else if(countTwo == 0){
+                two = i;
+                countTwo++;
+            } else {
+                  countOne--;
+                countTwo--;
+            }
+        }
+        int count1= 0;
+        int count2 = 0;
+        
+        List<Integer> result = new ArrayList<>();
+         for(int n:nums){
+            if (one != null && n == one) count1++;
+            if (two != null && n == two) count2++;
+            }
+        
+        int n = nums.length;
+        if (count1 > n/3) result.add(one);
+        if (count2 > n/3) result.add(two);
+
+        return result;
+    }
+
+}
