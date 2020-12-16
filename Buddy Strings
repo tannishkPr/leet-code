@@ -1,0 +1,24 @@
+class Solution {
+    public boolean buddyStrings(String A, String B) {
+        if(A.length() != B.length())
+            return false;
+        if(A.equals(B)){
+            HashSet<Character> chars = new HashSet<>();
+            for(int i=0;i<A.length();i++){
+                if(chars.contains(A.charAt(i)))
+                    return true;
+                chars.add(A.charAt(i));
+            }
+            return false;
+        }
+         int misMatch = 0;
+        List<Integer> listOfMisMatches = new ArrayList<>();
+        for(int i=0;i<A.length();i++){
+            if(A.charAt(i) != B.charAt(i)){
+                 misMatch++;
+                listOfMisMatches.add(i);
+            }
+        }
+        return (misMatch == 2) ? A.charAt(listOfMisMatches.get(0)) == B.charAt(listOfMisMatches.get(1)) && A.charAt(listOfMisMatches.get(1)) == B.charAt(listOfMisMatches.get(0)) : false ;
+    }
+}
